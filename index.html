@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>회원 탈퇴</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', sans-serif;
+      background: #f5f5f3;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .wd-wrap {
+      width: 100%; max-width: 460px;
+      background: #fff;
+      border: 0.5px solid rgba(0,0,0,0.1);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .wd-header {
+      background: #fff5f5;
+      border-bottom: 0.5px solid #fcc;
+      padding: 1.25rem 1.5rem;
+    }
+    .wd-header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+    .wd-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #e24b4a;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .wd-header h2 { font-size: 16px; font-weight: 500; margin: 0; color: #a32d2d; }
+    .wd-info-list { display: flex; flex-direction: column; gap: 6px; }
+    .wd-info-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #a32d2d; }
+    .wd-dot { width: 4px; height: 4px; border-radius: 50%; background: #a32d2d; flex-shrink: 0; }
+    .wd-body { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1.1rem; }
+    .wd-field label { display: block; font-size: 13px; font-weight: 500; color: #555; margin-bottom: 6px; }
+    .wd-field select {
+      width: 100%; height: 40px; padding: 0 10px;
+      font-size: 14px; color: #1a1a1a;
+      background: #f9f9f7;
+      border: 0.5px solid rgba(0,0,0,0.18);
+      border-radius: 8px;
+      outline: none; cursor: pointer;
+      font-family: inherit;
+    }
+    .wd-field select:focus {
+      border-color: #1a1a1a;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    }
+    .wd-check-label {
+      display: flex; align-items: flex-start; gap: 10px;
+      cursor: pointer; font-size: 13px; color: #666; line-height: 1.5;
+    }
+    .wd-check-label input[type="checkbox"] {
+      width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0;
+      cursor: pointer; accent-color: #e24b4a;
+    }
+    .wd-divider { height: 0.5px; background: rgba(0,0,0,0.08); }
+    .wd-btn-area { padding: 1rem 1.5rem 1.5rem; }
+    .wd-progress-wrap {
+      height: 5px; border-radius: 3px;
+      background: #eee; overflow: hidden; margin-bottom: 10px;
+    }
+    .wd-progress-bar {
+      height: 100%; border-radius: 3px;
+      background: #e24b4a; width: 0%; transition: width 0.12s ease-out;
+    }
+    .wd-btn {
+      width: 100%; height: 44px;
+      background: #fff5f5; color: #a32d2d;
+      border: 0.5px solid #fcc;
+      border-radius: 8px;
+      font-family: inherit; font-size: 14px; font-weight: 500;
+      cursor: pointer;
+    }
+    .wd-btn:active { opacity: 0.75; }
+    .wd-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .wd-err {
+      margin: 0 1.5rem 1.5rem;
+      padding: 10px 14px;
+      background: #fff5f5;
+      border: 0.5px solid #fcc;
+      border-radius: 8px;
+      font-size: 13px; color: #a32d2d;
+      display: none; align-items: center; gap: 8px;
+    }
+    .wd-err.show { display: flex; }
+  </style>
+</head>
+<body>
+
+<div class="wd-wrap">
+  <div class="wd-header">
+    <div class="wd-header-top">
+      <div class="wd-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <h2>탈퇴 시 아래 정보가 모두 삭제됩니다</h2>
+    </div>
+    <div class="wd-info-list">
+      <div class="wd-info-item"><div class="wd-dot"></div>계정 정보 및 프로필 (이름, 아이디, 생년월일 등)</div>
+      <div class="wd-info-item"><div class="wd-dot"></div>저장된 게시글, 댓글, 좋아요 내역</div>
+      <div class="wd-info-item"><div class="wd-dot"></div>보유 포인트 및 쿠폰 (복구 불가)</div>
+      <div class="wd-info-item"><div class="wd-dot"></div>결제 내역 및 구독 정보</div>
+      <div class="wd-info-item"><div class="wd-dot"></div>탈퇴 후 동일 아이디로 재가입 불가</div>
+    </div>
+  </div>
+
+  <div class="wd-body">
+    <div class="wd-field">
+      <label>탈퇴 사유를 선택해주세요</label>
+      <select id="reason">
+        <option value="">-- 사유 선택 --</option>
+        <option value="1">서비스 불만족</option>
+        <option value="2">사용 빈도가 낮음</option>
+        <option value="3">개인정보 보호</option>
+        <option value="4">다른 서비스로 이동</option>
+        <option value="5">일시적으로 탈퇴 후 재가입 예정</option>
+        <option value="6">기타</option>
+      </select>
+    </div>
+    <label class="wd-check-label">
+      <input type="checkbox" id="agreeCheck" />
+      위 안내 사항을 모두 확인하였으며, 탈퇴 시 모든 데이터가 삭제되어 복구할 수 없음에 동의합니다.
+    </label>
+  </div>
+
+  <div class="wd-divider"></div>
+
+  <div class="wd-btn-area">
+    <div class="wd-progress-wrap"><div class="wd-progress-bar" id="progressBar"></div></div>
+    <button class="wd-btn" id="wdBtn" onclick="handleClick()">탈퇴하기</button>
+  </div>
+
+  <div class="wd-err" id="wdErr">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0">
+      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+    <span id="wdErrMsg"></span>
+  </div>
+</div>
+
+<script>
+  const MAX = 15;
+  const TIMEOUT = 800;
+  let count = 0;
+  let timer = null;
+  let done = false;
+
+  const bar = document.getElementById('progressBar');
+  const btn = document.getElementById('wdBtn');
+  const errEl = document.getElementById('wdErr');
+  const errMsg = document.getElementById('wdErrMsg');
+
+  function showErr(msg) { errMsg.textContent = msg; errEl.classList.add('show'); }
+  function hideErr() { errEl.classList.remove('show'); }
+
+  function drain() {
+    if (count <= 0) return;
+    count = Math.max(0, count - 1);
+    bar.style.width = (count / MAX * 100) + '%';
+    if (count > 0) timer = setTimeout(drain, 120);
+  }
+
+  function handleClick() {
+    if (done) return;
+    hideErr();
+
+    if (!document.getElementById('reason').value) { showErr('탈퇴 사유를 선택해주세요.'); return; }
+    if (!document.getElementById('agreeCheck').checked) { showErr('탈퇴 동의 체크란을 확인해주세요.'); return; }
+
+    clearTimeout(timer);
+    count = Math.min(MAX, count + 1);
+    bar.style.width = (count / MAX * 100) + '%';
+
+    if (count >= MAX) {
+      done = true;
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.disabled = false;
+        done = false;
+        count = 0;
+        bar.style.width = '0%';
+        showErr('[점검 중] 현재 서버 점검으로 인해 탈퇴 처리가 불가능합니다. 잠시 후 다시 시도해주세요.');
+      }, 1800);
+      return;
+    }
+
+    timer = setTimeout(drain, TIMEOUT);
+  }
+</script>
+</body>
+</html>
